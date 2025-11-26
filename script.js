@@ -5,17 +5,34 @@ const overEarHeadphones = 'Over-ear headphones'
 const laptop = 'Laptop'
 const desktopPC = 'Desktop PC'
 const ipad = 'iPad'
+const mp3 = 'MP3 devices'
 const tv = 'TV'
+
 const book = 'Book'
-// categories
-const technology = 'Technology'
+
+// technology categories
 const entertainment = 'Entertainment'
+const reading = 'Reading'
+const technology = 'Technology'
+const job = 'Job'
+const videogames = 'Videogames'
+const music = 'Music'
+const develop = 'Develop'
+const portable = 'Portable'
+const college = 'College'
 // Brands
-const bookStore = 'Book store'
 const apple = 'Apple'
 const samsung = 'Samsung'
+const dell = 'DELL'
+const amazon = 'Amazon'
+const steren = 'Steren'
+const intel = 'Intel'
+const tesla = 'Tesla'
+const nvidia = 'Nvidia'
+// Novel store
+const novelStore = 'Novel store'
 
-const items = [
+let items = [
     {
         id: idCounter++,
         name: 'MacBook Laptop Air',
@@ -25,7 +42,7 @@ const items = [
         onSale: true,
         brand: apple,
         type: laptop,
-        category: technology,
+        categories: [technology, job, reading, develop, college],
         date: '06-07-2023',
         description: 'The MacBook Air is a sleek and lightweight laptop designed for everyday use, offering powerful performance in a compact form. Featuring Apple’s M1 chip, it delivers impressive speed, efficiency, and battery life, making it ideal for both work and leisure. With a Retina display, fast SSD storage, and a quiet fanless design, the MacBook Air is perfect for students, professionals, and casual users alike. Its thin, durable aluminum body ensures portability without sacrificing power.'
     },
@@ -38,7 +55,7 @@ const items = [
         onSale: true,
         brand: apple,
         type: desktopPC,
-        category: technology,
+        categories: [technology, job, develop, reading],
         date: '08-09-2023',
         description: 'The MacBook Desktop, specifically the 2021 24-inch iMac with the M1 chip, combines stunning performance with a sleek, vibrant design. Featuring a high-resolution 4.5K Retina display, it offers vivid colors and crisp details, perfect for creative tasks, media consumption, or work. Powered by Apple´s M1 chip, it ensures smooth multitasking, enhanced graphics, and excellent energy efficiency. With a variety of color options and an ultra-thin profile, the iMac is ideal for both home and office use, delivering powerful performance in a compact all-in-one design'
     },
@@ -51,7 +68,7 @@ const items = [
         onSale: true,
         brand: samsung,
         type: 'TV',
-        category: 'technology',
+        categories: [technology, entertainment],
         date: '03-05-2021',
         description: 'The Samsung Smart TV offers an exceptional viewing experience with vibrant colors, sharp details, and sleek design. Equipped with 4K resolution and powered by Quantum Dot technology, it delivers stunning picture quality with enhanced contrast and brightness. Its smart features allow easy access to popular streaming apps, voice control, and seamless connectivity with other devices. With a slim, modern frame and multiple size options, this TV is perfect for elevating your home entertainment setup, providing both style and performance.'
     },
@@ -64,7 +81,7 @@ const items = [
         onSale: true,
         brand: apple,
         type: ipad,
-        category: technology,
+        categories: [technology, ipad, entertainment, college],
         date: '05-07-2022',
         description: 'The Apple iPad Air (2020) combines performance, portability, and style in a sleek design. Featuring a 10.9-inch Liquid Retina display, it offers vibrant colors and sharp clarity for all types of content. Powered by the A14 Bionic chip, it handles multitasking, gaming, and creative apps with ease. The iPad Air supports the Apple Pencil and Smart Keyboard, making it ideal for productivity and creativity on the go. With Touch ID for security, a thin profile, and various color options, the iPad Air is a versatile device for both work and play.'
     },
@@ -77,7 +94,7 @@ const items = [
         onSale: false,
         brand: apple,
         type: overEarHeadphones,
-        category: technology,
+        categories: [technology, music, entertainment],
         date: '03-08-2025',
         description: 'The Apple AirPods Pro (2nd generation) deliver an immersive audio experience with active noise cancellation and a customizable fit for superior comfort. Featuring Apple’s H2 chip, they offer enhanced sound quality, clearer calls, and improved spatial audio with dynamic head tracking. The AirPods Pro are sweat and water-resistant, making them ideal for workouts or outdoor activities. With a longer battery life and a sleek, compact design, they offer seamless integration with Apple devices, providing a premium listening experience whether you´re at home, on the go, or working out.'
     },
@@ -88,15 +105,47 @@ const items = [
         discount: .15,
         stock: 0,
         onSale: false,
-        brand: bookStore,
-        type: bookStore,
-        category: entertainment,
+        brand: novelStore,
+        type: book,
+        categories: [entertainment, reading],
         date: '15-09-1986',
-        description: '*It* by Stephen King is a horror novel centered around a shape-shifting entity that preys on the children of Derry, Maine. The story follows a group of misfit kids who band together to confront the creature, which manifests as their worst fears, including the terrifying Pennywise the Clown. Set in two timelines—one during their childhood and the other when they´re adults—the novel explores themes of fear, friendship, and the power of memory. It´s a chilling tale of an ancient evil and the bond that can defeat it.'
+        description: 'It by Stephen King is a horror novel centered around a shape-shifting entity that preys on the children of Derry, Maine. The story follows a group of misfit kids who band together to confront the creature, which manifests as their worst fears, including the terrifying Pennywise the Clown. Set in two timelines—one during their childhood and the other when they´re adults—the novel explores themes of fear, friendship, and the power of memory. It´s a chilling tale of an ancient evil and the bond that can defeat it.'
     }
 ]
 
-const addItem = (name, price, discount, stock, brand, type, category, date, description) => {
+const returnCategoryList = () => {
+    const categoryList = []
+    while (true){
+        let category = prompt('Type category name: ')
+        categoryList.push(category)
+        let asnwer = confirm('Wanna continue applying categories?')
+        if (asnwer == true){
+            continue
+        }else{
+            break
+        }
+    }
+    return categoryList
+}
+
+const requestProps = () => {
+    const name = prompt('Type item name: ')
+    const price = Number(prompt('Type item price: '))
+    const discount = Number(prompt('Type item discount: '))
+    const stock = Number(prompt('Type stock: '))
+    const brand = prompt('Type item brand: ')
+    const type = prompt('Type item type: ')
+    const categories = returnCategoryList()
+    const date = prompt('Type assignment date: ')
+    const description = prompt('Type item description: ')
+
+    return [name, price, discount, stock, brand, type, categories, date, description]
+}
+
+const addItem = () => {
+
+    let [name, price, discount, stock, brand, type, categories, date, description] = requestProps()
+
     const item = {
         name: name,
         price: price,
@@ -104,7 +153,7 @@ const addItem = (name, price, discount, stock, brand, type, category, date, desc
         stock: stock,
         brand: brand,
         type: type,
-        category: category,
+        categories: categories,
         date: date,
         description: description
     }
@@ -116,46 +165,49 @@ const addItem = (name, price, discount, stock, brand, type, category, date, desc
     }else{
         item['onSale'] = false
     }
-    const asnwer = confirm(`Are you sure to add the ${item['name']} item?`)
-    if (asnwer){
+
+    let answer = confirm(`Are you sure to add the ${name} item?`)
+    if (answer == true){
         items.push(item)
-        alert(`${item['name']} applied succesfully!`)
-    }
-    else{
+        alert(`The ${name} item was applied succesfully!`)
+    }else{
         alert('Cancelled operation!')
     }
 }
 
-const updateItem = (id, name, price, discount, stock, brand, type, category, date, description) => {
+const updateItem = (id) => {
+
+    
     items.forEach(item => {
         if (item['id'] == id){
-            item['name'] = name
-            item['price'] = price
-            item['discount'] = discount
-            item['stock'] = stock
-            item['brand'] = brand
-            item['type'] = type
-            item['category'] = category
-            item['date'] = date
-            item['description'] = description
-        }
-        // Apply onSale property
-        if(stock > 0) {
-            item['onSale'] = true
-        }else{
-            item['onSale'] = false
-        }
-        const asnwer = confirm(`Are you sure to update the ${item['name']} item?`)
-        if (asnwer){
-            alert(`Updated ${item['name']} succesfully!`)
-        }else{
-            alert('Cancelled operation!')
+            const asnwer = confirm(`Are you sure to update the ${item['name']} item?`)
+            if (asnwer == true){
+                let [name, price, discount, stock, brand, type, categories, date, description] = requestProps()
+                item['name'] = name
+                item['price'] = price
+                item['discount'] = discount
+                item['stock'] = stock
+                item['brand'] = brand
+                item['type'] = type
+                item['categories'] = categories
+                item['date'] = date
+                item['description'] = description
+                // Apply onSale property
+                if(stock > 0) {
+                    item['onSale'] = true
+                }else{
+                    item['onSale'] = false
+                }
+                alert(`Updated ${name} succesfully!`)
+            }else{
+                alert('Cancelled operation!')
+            }
         }
     })
 }
 
 const deleteItem = (id) => {
-    delete items[id-1]
+    items = items.filter(item => item['id'] != id)
 }
 
 const showItem = (id) => {
@@ -169,7 +221,7 @@ const showItem = (id) => {
                 stock - ${item['stock']}
                 brand - ${item['brand']}
                 type - ${item['type']}
-                category - ${item['category']}
+                category list - ${item['categories']}
                 date - ${item['date']}
 `)
         }
@@ -186,7 +238,7 @@ const get = () => {
             stock - ${item['stock']}
             brand - ${item['brand']}
             type - ${item['type']}
-            category - ${item['category']}
+            category list - ${item['categories']}
             date - ${item['date']}
             -------`)
     }
@@ -194,28 +246,15 @@ const get = () => {
 
 const filterCategory = (category) => {
     let filterArray = items.filter(item => {
-        if (item['category'] == category) return item
+        if (item['categories'].includes(category)) return item
         })
     return filterArray
 }
 
-// addItem function example
-// addItem('MacBook Laptop Pro - 2025 model edition', 25000, .20, 10, apple, laptop, technology, '09-02-2025', `The MacBook Pro (2021) with Apple’s M1 Pro or M1 Max chip is a powerhouse designed for professionals who need exceptional performance. With a stunning Liquid Retina XDR display, it delivers incredible brightness, contrast, and color accuracy, perfect for creative and technical work. The M1 Pro or M1 Max chip provides fast processing speeds, enhanced graphics, and impressive battery life, enabling smooth multitasking and demanding workflows. Featuring a robust build, advanced cooling system, and a wide range of ports, the MacBook Pro is a versatile, high-performance laptop ideal for power users and creatives alike.
-// `)
+// addItem examples
+// addItem('MacBook Laptop Pro - 2025 model edition', 25000, .20, 10, apple, laptop, technology, '09-02-2025', `The MacBook Pro (2021) with Apple’s M1 Pro or M1 Max chip is a powerhouse designed for professionals who need exceptional performance.`)
 
-// updateItem function example
-// updateItem(1, 'MacBook Laptop (Air model)', 12500, .25, 20, apple, laptop, technology, '05-09-2024', 'The MacBook Air (2023) powered by the M2 chip offers an ultra-portable, high-performance laptop perfect for everyday use. With a 13.6-inch Liquid Retina display, it delivers vibrant colors and sharp clarity, ideal for both work and entertainment. The M2 chip enhances speed, multitasking, and battery life, allowing you to seamlessly run apps, edit videos, and browse with ease. Its thin, lightweight design and fanless architecture ensure silent operation while maintaining impressive power. The MacBook Air also features improved FaceTime HD camera, upgraded speakers, and fast SSD storage, making it an excellent choice for students, professionals, and casual users alike.')
+// addItem('Kindle - 2024 model Pro edition', 900, .20, 15, amazon, ipad, technology, '04-05-2016', 'A Kindle is a lightweight, portable e-reader designed for enjoying digital books with a paper-like screen that´s easy to read even in sunlight, long battery life, and the convenience of carrying an entire library in one device.')
 
-const typeItemProperties = () => {
-    const name = prompt('Type item name: ')
-    const price = Number(prompt('Type item price: '))
-    const discount = Number(prompt('Type item discount: '))
-    const stock = Number(prompt('Type stock: '))
-    const brand = prompt('Type item brand: ')
-    const type = prompt('Type item type: ')
-    const category = prompt('Type item category: ')
-    const date = prompt('Type assignment date: ')
-    const description = prompt('Type item description: ')
-
-    return [name, price, discount, stock, brand, type, category, date, description]
-}
+// updateItem example
+// updateItem(1, 'MacBook Laptop (Air model)', 12500, .25, 20, apple, laptop, technology, '05-09-2024', 'The MacBook Air (2023) powered by the M2 chip offers an ultra-portable, high-performance laptop perfect for everyday use.')

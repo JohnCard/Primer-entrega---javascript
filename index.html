@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
     <title>Entrega N°1</title>
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <h1 class="text-center fw-bold my-5">Integrando simulador - online ecommerce</h1>
-    <div class="card mx-5 mt-5">
-        <div class="card-body">
-            <h5 class="card-tictle">Ecommerce</h5>
-            <p class="card-text">For this simulator, the goal is to create a series of basic and typical interactions found in any online ecommerce, such as adding a product to a shopping cart (a list of products), filtering a specific item by its identifier for more details, deleting an item, updating, or even filtering all available information about all items. This is all intended to practice the basic concepts learned throughout the videos in this course to master JavaScript from scratch, including the use of functions, arrays, constants, variables, objects, and using the console for information filtering, etc.</p>
-            <p class="card-text"><small class="text-body-secondary">Description</small></p>
+<body>
+    <nav class="navbar bg-body-tertiary fixed-top navbar-expand-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/ecommerce__icon.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Offcanvas navbar
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <img src="img/Ecommerce.png" class="card-img-bottom px-5 py-3" alt="ecommerce">
-    </div>
-    <footer class="py-4 bg-secondary-subtle mt-auto">
-        <h4 class="text-center fw-bold">Footer</h4>
-    </footer>
+    </nav>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
