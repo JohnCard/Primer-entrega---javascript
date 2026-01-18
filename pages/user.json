@@ -1,0 +1,9 @@
+{
+    "name": "Juan Carlos",
+    "lastname": "Sánchez Martínez",
+    "age": 23,
+    "credit": 25000,
+    "password": "juan-password-123@789_hard",
+    "img": "https://cdn-icons-png.flaticon.com/512/12538/12538444.png",
+    "cart": []
+}

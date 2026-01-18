@@ -1,0 +1,392 @@
+[
+    {
+    "model": "ecommerce_app.product",
+    "pk": 8,
+    "fields": {
+        "created_at": "2026-01-13T01:14:50.384Z",
+        "updated_at": "2026-01-14T18:50:56.662Z",
+        "name": "Later outside",
+        "price": "2184.00",
+        "slug": "later-outside",
+        "brand": "Wilkerson and Sons",
+        "img": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png", 
+        "description": "Call option a. Three before today.\nAge send determine well. Money operation mean involve. Parent student media break.", 
+        "categories": [8, 14, 15]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 9,
+    "fields": {
+        "created_at": "2026-01-13T02:16:15.967Z",
+        "updated_at": "2026-01-14T18:50:56.662Z",
+        "name": "Ready around",
+        "price": "7654.00",
+        "slug": "ready-around",
+        "brand": "Nelson-Lopez",
+        "img": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_t.png", 
+        "description": "Talk people military sense only recent. Continue six manager finally.\nLand court on successful.", 
+        "categories": [18, 21, 22]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 10,
+    "fields": {
+        "created_at": "2026-01-13T02:16:17.847Z",
+        "updated_at": "2026-01-14T18:50:56.661Z",
+        "name": "Former west",
+        "price": "9078.00",
+        "slug": "former-west",
+        "brand": "Simmons LLC",
+        "img": "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_t.png", 
+        "description": "Role night rate language answer radio radio. Nearly ground series us first. Improve mind over treat.", 
+        "categories": [10, 13, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 11,
+    "fields": {
+        "created_at": "2026-01-13T02:16:20.332Z",
+        "updated_at": "2026-01-14T18:50:56.660Z",
+        "name": "Soldier clear",
+        "price": "2823.00",
+        "slug": "soldier-clear",
+        "brand": "Bell, Doyl and Jackson", 
+        "img": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png", 
+        "description": "Stage college business about magazine list believe. His office spend book consider table. Product southern environment official cover red serious.", 
+        "categories": [10, 20, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 12,
+    "fields": {
+        "created_at": "2026-01-13T02:16:26.210Z",
+        "updated_at": "2026-01-14T18:50:56.659Z",
+        "name": "Environmental operation",
+        "price": "9535.00",
+        "slug": "environmental-operation",
+        "brand": "Jones, Thompso and Hunt", 
+        "img": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png", 
+        "description": "Start red money vote new newspaper idea. Daughter their page environment morning particular concern.\nRisk main break national use white. Wear fast history will.", 
+        "categories": [10, 17, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 13,
+    "fields": {
+        "created_at": "2026-01-13T02:18:05.866Z",
+        "updated_at": "2026-01-14T18:50:56.658Z",
+        "name": "Laugh pay",
+        "price": "4426.00",
+        "slug": "laugh-pay",
+        "brand": "Chase, Fletche and Zavala", 
+        "img": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_t.png", 
+        "description": "Tv rather civil think reflect type. Phone seem officer people chair image.\nWithout unit international. May during short ability.", 
+        "categories": [10, 13]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 14,
+    "fields": {
+        "created_at": "2026-01-13T02:18:05.872Z",
+        "updated_at": "2026-01-14T18:50:56.657Z",
+        "name": "Policy ground",
+        "price": "6505.00",
+        "slug": "policy-ground",
+        "brand": "Hill Ltd",
+        "img": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_t.png", 
+        "description": "Avoid vote must increase loss girl finally me.\nResult traditional study give evidence senior. Edge organization foreign east pretty relationship.\nAfter watch off back. Probably serious less detail.", 
+        "categories": [8, 14, 17]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 15,
+    "fields": {
+        "created_at": "2026-01-13T02:18:32.370Z",
+        "updated_at": "2026-01-14T18:50:56.657Z",
+        "name": "Role suddenly",
+        "price": "8868.00",
+        "slug": "role-suddenly",
+        "brand": "White-Snyder",
+        "img": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png", 
+        "description": "Item offer sure. Peace fast as sea continue talk fast ability. Certain race kind involve ever.\nCouple travel lose everyone spring. Fine TV game. Guy activity husband bank by herself hope.", 
+        "categories": [9, 16, 22]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 16,
+    "fields": {
+        "created_at": "2026-01-13T02:19:03.681Z",
+        "updated_at": "2026-01-14T18:50:56.656Z",
+        "name": "Business these",
+        "price": "9823.00",
+        "slug": "business-these",
+        "brand": "Russell and Sons",
+        "img": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png", 
+        "description": "Painting small itself before fear stop them. During new personal nearly amount. Letter we mention across sport.", 
+        "categories": [19, 21, 23]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 17,
+    "fields": {
+        "created_at": "2026-01-13T02:19:03.690Z",
+        "updated_at": "2026-01-14T18:50:56.655Z",
+        "name": "Event give",
+        "price": "6765.00",
+        "slug": "event-give",
+        "brand": "Smith-Young",
+        "img": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png", 
+        "description": "Become bed today candidate. Music a low attention provide improve rock.\nSimple price color reach well give. Bag arrive kid build myself. Pay brother western.", 
+        "categories": [8, 15, 23]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 18,
+    "fields": {
+        "created_at": "2026-01-13T02:19:03.694Z",
+        "updated_at": "2026-01-14T18:50:56.654Z",
+        "name": "Significant court",
+        "price": "7914.00",
+        "slug": "significant-court",
+        "brand": "Wilson-Roy",
+        "img": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_t.png", 
+        "description": "Later past because return ten.\nBring hospital role next trade. Program into physical lose Mr. Organization catch will between bar.\nImpact catch woman method.", 
+        "categories": [19, 22]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 19,
+    "fields": {
+        "created_at": "2026-01-13T02:20:06.864Z",
+        "updated_at": "2026-01-14T18:50:56.653Z",
+        "name": "Watch me",
+        "price": "1792.00",
+        "slug": "watch-me",
+        "brand": "Turner and Sons",
+        "img": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png", 
+        "description": "Professional total him explain hotel show. Miss lot into deep per heart.\nChoice skin PM security end bring.", 
+        "categories": [14, 15, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 20,
+    "fields": {
+        "created_at": "2026-01-13T02:20:07.985Z",
+        "updated_at": "2026-01-14T18:50:56.652Z",
+        "name": "Church wall",
+        "price": "5314.00",
+        "slug": "church-wall",
+        "brand": "Noble, Rollin and Hawkins", 
+        "img": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png", 
+        "description": "Beat cost war million job close. Free open war data Mrs. Stage drive yeah tree statement important bar.\nDiscover teach plan free. Health same never effect scientist. Car pass management less drug.", 
+        "categories": [7, 14, 20]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 21,
+    "fields": {
+        "created_at": "2026-01-13T02:20:09.370Z",
+        "updated_at": "2026-01-14T18:50:56.651Z",
+        "name": "Ten part",
+        "price": "1530.00",
+        "slug": "ten-part",
+        "brand": "Berg, Hughe and Berry", 
+        "img": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png", 
+        "description": "General hospital head former set just TV level. Wish reflect difference herself reveal occur source our. All media modern TV.", 
+        "categories": [9, 19, 20]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 22,
+    "fields": {
+        "created_at": "2026-01-13T02:20:10.020Z",
+        "updated_at": "2026-01-14T18:50:56.650Z",
+        "name": "Inside alone",
+        "price": "9819.00",
+        "slug": "inside-alone",
+        "brand": "Silva, Wilso and Thomas", 
+        "img": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png", 
+        "description": "Society much national western large he reason almost. Tonight coach campaign already several put ten. War free sometimes message herself many role affect. Number power style employee whole.", 
+        "categories": [10, 18, 19]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 23,
+    "fields": {
+        "created_at": "2026-01-13T02:20:10.563Z",
+        "updated_at": "2026-01-14T18:50:56.649Z",
+        "name": "View green",
+        "price": "7974.00",
+        "slug": "view-green",
+        "brand": "Charles-Gordon",
+        "img": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_t.png", 
+        "description": "Provide four sport. Moment body analysis expert. By every a argue woman idea store.", 
+        "categories": [7, 8, 13]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 24,
+    "fields": {
+        "created_at": "2026-01-13T02:20:11.070Z",
+        "updated_at": "2026-01-14T18:50:56.648Z",
+        "name": "Game seem",
+        "price": "1710.00",
+        "slug": "game-seem",
+        "brand": "Smith-Mcmillan",
+        "img": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_t.png", 
+        "description": "Kind candidate century four face board. Hotel pick institution.\nPlan wide actually. Meet feel quality per plant force.", 
+        "categories": [10, 12, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 25,
+    "fields": {
+        "created_at": "2026-01-13T02:20:12.750Z",
+        "updated_at": "2026-01-14T18:50:56.647Z",
+        "name": "Sister join",
+        "price": "3236.00",
+        "slug": "sister-join",
+        "brand": "Warner, Gran and Boone", 
+        "img": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png", 
+        "description": "Space I management lead. Indeed yard find arrive hospital.\nTruth foreign hear president year major option. Than career include arm trade. Thousand whatever would.", 
+        "categories": [7, 12, 21]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 26,
+    "fields": {
+        "created_at": "2026-01-13T02:20:16.894Z",
+        "updated_at": "2026-01-14T18:50:56.646Z",
+        "name": "Never east",
+        "price": "4934.00",
+        "slug": "never-east",
+        "brand": "Stewart-Ibarra",
+        "img": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png", 
+        "description": "Well enough low director new food note. Teach box plant skill ask.\nFocus smile grow design officer history. Summer because dream explain ground sea. Medical coach piece cause set. Model what wall.", 
+        "categories": [8, 19, 23]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 27,
+    "fields": {
+        "created_at": "2026-01-13T02:20:17.785Z",
+        "updated_at": "2026-01-14T18:50:56.645Z",
+        "name": "Because treat",
+        "price": "5760.00",
+        "slug": "because-treat",
+        "brand": "Lucas-Page",
+        "img": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_t.png", 
+        "description": "Benefit student know score important. Hospital many fish region Democrat. Score throw none decade sure loss.\nDog choose TV offer Republican. Focus resource red tough think.", 
+        "categories": [20, 22]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 28,
+    "fields": {
+        "created_at": "2026-01-13T02:20:18.718Z",
+        "updated_at": "2026-01-14T18:50:56.644Z",
+        "name": "Continue most",
+        "price": "4120.00",
+        "slug": "continue-most",
+        "brand": "Gibbs, Adam and Cannon", 
+        "img": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png", 
+        "description": "Daughter deep age heart director act. Forget interesting oil response senior. Black you new stop say.\nMember movement true TV Mr thus type.", 
+        "categories": [8, 10, 15]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 29,
+    "fields": {
+        "created_at": "2026-01-13T02:20:19.236Z",
+        "updated_at": "2026-01-14T18:50:56.643Z",
+        "name": "Raise smile",
+        "price": "8826.00",
+        "slug": "raise-smile",
+        "brand": "Bishop, Jackso and White", 
+        "img": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png", 
+        "description": "Character book drug reduce clearly television. Eye hot heavy increase among affect.\nStyle today really move collection long. Yes evidence board paper nor agreement.", 
+        "categories": [8, 15, 20]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 30,
+    "fields": {
+        "created_at": "2026-01-13T02:20:19.865Z",
+        "updated_at": "2026-01-14T18:50:56.642Z",
+        "name": "Grow wait",
+        "price": "4988.00",
+        "slug": "grow-wait",
+        "brand": "Galloway Ltd",
+        "img": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png", 
+        "description": "Fine center save build city drug.\nThird according or benefit. Feel base relationship total citizen people produce. Worry western task former. Address management even black before result president.", 
+        "categories": [12, 16, 20]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 31,
+    "fields": {
+        "created_at": "2026-01-13T02:20:20.476Z",
+        "updated_at": "2026-01-14T18:50:56.641Z",
+        "name": "Evening arrive",
+        "price": "4120.00",
+        "slug": "evening-arrive",
+        "brand": "Torres-Fernandez",
+        "img": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png", 
+        "description": "Event ago ball city. Same artist little piece.\nCompare position car town term bring. Woman team yet tell.\nOfficer instead picture. Customer drive also third similar contain.", 
+        "categories": [8, 9, 10]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 32,
+    "fields": {
+        "created_at": "2026-01-13T02:20:21.074Z",
+        "updated_at": "2026-01-14T18:50:56.640Z",
+        "name": "Thousand song",
+        "price": "6572.00",
+        "slug": "thousand-song",
+        "brand": "Jones Group",
+        "img": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png", 
+        "description": "Far true or concern fast. Plan policy off also style rich his. Seven first support will one.", 
+        "categories": [9, 15, 19]
+        }
+    },
+    {
+    "model": "ecommerce_app.product",
+    "pk": 33,
+    "fields": {
+        "created_at": "2026-01-13T04:26:07.704Z",
+        "updated_at": "2026-01-14T18:50:56.635Z",
+        "name": "Dinner price",
+        "price": "7803.00",
+        "slug": "dinner-price",
+        "brand": "Jones, Dawso and Hernandez", 
+        "img": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png", 
+        "description": "Own mind human event protect suddenly realize. Since difference owner amount send. Summer place oil soldier successful such policy.", 
+        "categories": [10,5,15]
+        }
+    }
+]
