@@ -4,33 +4,22 @@ const loginUser = () => {
         .then(res => res.json())
         .then(data => {
             const stringFormat = JSON.stringify(data)
-            localStorage.setItem('user', (stringFormat))
+            localStorage.setItem('user', stringFormat)
         });
 }
+
+const bottonUser = document.getElementById('save-user')
+bottonUser.addEventListener('click', loginUser)
 
 //todo save main gallery data
 //todo prepare main data for localStorage´s gallery variable
 const saveData = () => {
-    let gallery = []
-    gallery = JSON.stringify(gallery)
-    localStorage.setItem('gallery', gallery)
-    gallery = localStorage.getItem('gallery')
-    gallery = JSON.parse(gallery)
     fetch('product.json')
         .then(res => res.json())
         .then(data => {
-            for(let item of data){
-                gallery.push({
-                    pk: item.pk,
-                    name: item.fields.name,
-                    price: item.fields.price,
-                    slug: item.fields.slug,
-                    brand: item.fields.brand,
-                    img: item.fields.img,
-                    description: item.fields.description,
-                })
-            }
+            localStorage.setItem('gallery', JSON.stringify(data))
         });
-    gallery = JSON.stringify(gallery)
-    localStorage.setItem('gallery', gallery)
 }
+
+const bottonData = document.getElementById('save-data')
+bottonData.addEventListener('click', saveData)

@@ -7,14 +7,14 @@ const accordionItem = (item, state='') => {
     <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-secondary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${item.pk}" aria-expanded="false" aria-controls="flush-collapse${item.pk}">
-                ${item.name}
+                ${item.fields.name}
             </button>
         </h2>
         <div id="flush-collapse${item.pk}" class="accordion-collapse collapse ${state}" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body bg-dark-subtle">
-                <p class="text-bg-light p-3">${item.description}</p>
-                <p class="text-bg-light p-3">Brand - ${item.brand}</p>
-                <p class="text-bg-light p-3">${item.price}</p>
+                <p class="text-bg-light p-3">${item.fields.description}</p>
+                <p class="text-bg-light p-3">Brand - ${item.fields.brand}</p>
+                <p class="text-bg-light p-3">${item.fields.price}</p>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@ const cart = user.cart
 
 //todo total payment
 let total = 0
-cart.forEach(item => total += parseFloat(item.price))
+cart.forEach(item => total += parseFloat(item.fields.price))
 
 //todo wrtie main data for accordion container based on user´s cart items
 cart.forEach((item, index) => {
@@ -44,7 +44,7 @@ cart.forEach((item, index) => {
 
 //todo User´s info card
 //? img
-const img = document.querySelector('img')
+const img = document.querySelectorAll('img')[1]
 img.src = user.img
 //? card title
 const cardTitle = document.querySelector('h3')
