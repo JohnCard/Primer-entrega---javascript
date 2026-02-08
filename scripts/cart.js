@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     if(!userExistence){
         Swal.fire({
             title: '¡Not user found!',
-            text: 'There is not existent user, redirect to login window or create your own account',
+            text: 'There is not existent user, redirect to login window or create your own account and login',
             icon: 'error',
             confirmButtonText: 'Ok',
         })
