@@ -342,6 +342,9 @@ accordion.addEventListener('click', (e) => {
             stockValue = (stockValue) ? parseInt(stockValue) : 0
             cart.forEach(item => {
                 if(item.pk == pk){
+                    let initPrice = item.price
+                    const stock = item.stock
+                    initPrice = (initPrice/stock)
                     item.stock -= stockValue
                     const coincidence = gallery.some(galleryItem => galleryItem.name == item.name)
                     if(coincidence){
@@ -350,12 +353,9 @@ accordion.addEventListener('click', (e) => {
                                 galleryItem.stock += stockValue
                             }
                         })
-                    }else{
+                    }else if(stockValue){
                         const newItem = {...item}
-                        let initPrice = item.price
-                        const stock = item.stock
-                        initPrice = (initPrice/stock)
-                        item.price -= initPrice*stockValue
+                        item.price -= initPrice*item.stock
                         newItem.price = initPrice
                         newItem.stock = stockValue
                         gallery.push(newItem)

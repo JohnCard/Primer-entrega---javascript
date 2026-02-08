@@ -253,7 +253,6 @@ const accordionItem = (item, state='') => {
         <div id="flush-collapse${item.pk}" class="accordion-collapse collapse ${state}" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body bg-dark-subtle">
                 <p class="text-bg-light p-3">${item.description}</p>
-                <p class="text-bg-light p-3 w-75">Categories - ${item.categories.join(', ')}</p>
                 <p class="text-bg-light p-3 w-75">Brand - ${item.brand}</p>
                 <p class="text-bg-light p-3 w-50">Price - $${Number(item.price).toLocaleString('en-US')}</p>
                 <p class="text-bg-light p-3 w-25">Stock - ${item.stock}</p>
