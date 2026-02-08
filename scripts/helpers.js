@@ -40,7 +40,13 @@ const deleteGalleryData = () => {
 //todo udd user
 const addUser = (user) => {
     let userArray = localStorage.getItem('users')
-    userArray = JSON.parse(userArray)
+    if(userArray){
+        userArray = JSON.parse(userArray)
+    }else{
+        localStorage.setItem('users','[]')
+        userArray = localStorage.getItem('users')
+        userArray = JSON.parse(userArray)
+    }
     userArray.push(user)
     userArray = JSON.stringify(userArray)
     localStorage.setItem('users', userArray)
