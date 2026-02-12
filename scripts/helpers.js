@@ -64,167 +64,7 @@ const updateUser = (user) => {
     const newUser = JSON.stringify(user)
     localStorage.setItem('user', newUser)
 }
-//* add item to user´s cart
-const addItem = (item, targetElement) => {
-    //todo spread new item
-    const newItem = {...item}
-    let itemPrice = newItem.price
-    let user = returnUser()
-    const userCart = [...user.cart]
-    stockForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-        let stockValue = stockForm.stock.value
-        stockValue = (stockValue) ? parseInt(stockValue) : 0
-        //todo verify the item’s existence in the user’s cart checking the user´s cart & based on item´s name
-        let someItem = userCart.some(item => item.name == newItem.name)
-        //? item exist this at user cart
-        if(someItem){
-            for(item of userCart){
-                if(item.name == newItem.name){
-                    const divParent = targetElement.closest('div')
-                    const stockContainer = divParent.children[2]
-                    const stockGalleryContainer = divParent.children[3]
-                    gallery.forEach(item => {
-                        if(item.name == newItem.name){
-                            item.stock -= stockValue
-                            if(item.stock <= 0){
-                                gallery = gallery.filter(galleryItem => galleryItem.pk != item.pk)
-                                row.innerHTML = ''
-                                gallery.forEach(galleryItem => {
-                                    const findItem = userCart.find(cartItem => cartItem.name == galleryItem.name)
-                                    row.innerHTML += (findItem) ? cardItem(galleryItem, findItem.stock) : cardItem(galleryItem)
-                                })
-                            }else{
-                                stockGalleryContainer.textContent = `Stock gallery - ${item.stock}`
-                            }
-                        }
-                    })
-                    item.stock += stockValue
-                    item.price = itemPrice*item.stock
-                    stockContainer.textContent = `Stock cart - ${item.stock}`
-                }
-            }
-            updateCurrentData(gallery)
-            user.cart = userCart
-            updateUser(user)
-            updateCurrentData(gallery)
-        }
-        else if(stockValue){
-            //todo Prepare user object to set local storage
-            newItem.pk = crypto.randomUUID()
-            newItem.stock = stockValue
-            newItem.price = stockValue*itemPrice
-            const divParent = targetElement.closest('div')
-            const stockContainer = divParent.children[2]
-            const stockGalleryContainer = divParent.children[3]
-            gallery.forEach(item => {
-                if(item.name == newItem.name){
-                    item.stock -= stockValue
-                    if(item.stock <= 0){
-                        gallery = gallery.filter(galleryItem => galleryItem.pk != item.pk)
-                        row.innerHTML = ''
-                        gallery.forEach(galleryItem => {
-                            const findItem = userCart.find(cartItem => cartItem.name == galleryItem.name)
-                            row.innerHTML += (findItem) ? cardItem(galleryItem, findItem.stock) : cardItem(galleryItem)
-                        })
-                    }else{
-                        stockGalleryContainer.textContent = `Stock gallery - ${item.stock}`
-                    }
-                }
-            })
-            updateCurrentData(gallery)
-            stockContainer.textContent = `Stock cart - ${stockValue}`
-            //todo Append for user cart
-            userCart.push(newItem)
-            user.cart = userCart
-            //todo Update user
-            updateUser(user)
-        }
-        stockForm.reset()
-    })
-}
-//* catching click
-const click = (element, arrowF, arraySearch) => {
-    element.addEventListener('click', (e) => {
-        const tagContent = e.target.textContent
-        if(tagContent == 'Add to cart'){
-            const pk = e.target.id
-            const item = arraySearch.find(item => item.pk == pk)
-            arrowF(item, e.target)
-        }
-        else{
-            const pk = e.target.classList[2]
-            const itemCart = {...arraySearch.find(item => item.pk == pk)}
-            let price = itemCart.price
-            price = parseInt(price)
-            let user = returnUser()
-            let cart = [...user.cart]
-            const coincidence = cart.some(currentItem => currentItem.name == itemCart.name)
-            if(coincidence){
-                cart.forEach(currentItem => {
-                    if(currentItem.name == itemCart.name){
-                        currentItem.stock += 1
-                        currentItem.price += price
-                        const button = e.target
-                        const divParent = button.closest('div')
-                        const stockContainer = divParent.children[2]
-                        const stockGalleryContainer = divParent.children[3]
-                        gallery.forEach(item => {
-                            if(item.name == itemCart.name){
-                                item.stock -= 1
-                                if(item.stock == 0){
-                                    gallery = gallery.filter(galleryItem => galleryItem.pk != item.pk)
-                                    row.innerHTML = ''
-                                    gallery.forEach(galleryItem => {
-                                        const findItem = cart.find(cartItem => cartItem.name == galleryItem.name)
-                                        row.innerHTML += (findItem) ? cardItem(galleryItem, findItem.stock) : cardItem(galleryItem)
-                                    })
-                                }else{
-                                    stockGalleryContainer.textContent = `Stock gallery - ${item.stock}`
-                                }
-                            }
-                        })
-                        stockContainer.textContent = `Stock cart - ${currentItem.stock}`
-                    }
-                })
-                updateCurrentData(gallery)
-                user.cart = cart
-                updateUser(user)
-            }
-            else{
-                itemCart.pk = crypto.randomUUID()
-                itemCart.stock = 1
-                itemCart.price = parseInt(itemCart.price)
-                const button = e.target
-                const divParent = button.closest('div')
-                const stockContainer = divParent.children[2]
-                stockContainer.textContent = `Stock cart - ${itemCart.stock}`
-                const stockGalleryContainer = divParent.children[3]
-                gallery.forEach(item => {
-                    if(item.name == itemCart.name){
-                        item.stock -= 1
-                        if(item.stock == 0){
-                            gallery = gallery.filter(galleryItem => galleryItem.pk != item.pk)
-                            row.innerHTML = ''
-                            gallery.forEach(galleryItem => {
-                                const findItem = cart.find(cartItem => cartItem.name == galleryItem.name)
-                                row.innerHTML += (findItem) ? cardItem(galleryItem, findItem.stock) : cardItem(galleryItem)
-                            })
-                        }else{
-                            stockGalleryContainer.textContent = `Stock gallery - ${item.stock}`
-                        }
-                    }
-                })
-                updateCurrentData(gallery)
-                cart.push(itemCart)
-                user.cart = cart
-                updateUser(user)
-            }
-        }
-    })
-}
-//* HMTL components
-//todo card html
+//todo html card
 const cardItem = (item, stockCart=0) => {
     //! <p class="card-text min-h-50">Categories - ${item.categories.join(', ')}</p>
     //! <p class="card-text">${item.description.slice(0, 120)}...</p>
@@ -237,7 +77,7 @@ const cardItem = (item, stockCart=0) => {
                         <p class="card-text">Stock cart - ${stockCart}</p>
                         <p class="card-text">Stock gallery - ${item.stock}</p>
                         <p class="card-text min-h-50">Brand - ${item.brand}</p>
-                        <button class="btn btn-primary me-3" id="${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Add to cart</button>
+                        <button class="btn btn-primary ${item.pk} me-3" data-bs-target="#exampleModal" data-bs-toggle="modal">Add to cart</button>
                         <button class="btn btn-primary ${item.pk}">Add one item</button>
                     </div>
                 </div>
@@ -304,4 +144,4 @@ const accordionContent = (listItems, accordionRef, htmlItem) => {
     }
 }
 
-export {saveGalleryData, cardItem, addItem, click, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery, stockForm}
+export {saveGalleryData, cardItem, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery, stockForm}
