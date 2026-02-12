@@ -216,7 +216,7 @@ emptyCartButton.addEventListener('click', () => {
     })
     //* succesfully update to gallery
     updateCurrentData(gallery)
-    //* reset user´s shooping cart to empty state
+    //* reset user´s shooping cart and total variable to empty state
     user.cart = []
     total = 0
     //* update to new user to local storage to keep permanent it´s change
