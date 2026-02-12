@@ -94,80 +94,6 @@ dateContainer.textContent = date
 //todo write main data for accordion(s) html container based on user´s cart and collection items
 accordionContent(cart, accordion, accordionItem)
 accordionContent(collectedItems, accordionTwo, accordionSubItem)
-//! delete cart item function
-const deleteItem = (item) => {
-    //todo get current user's cart
-    user = returnUser()
-    cart = [...user.cart]
-    //todo get "primary key" & "stock" from item keys
-    const pk = item.pk
-    const stock = item.stock
-    //todo look for a match in the gallery array to see if there is any item with the same name as the current one.
-    const coincidence = gallery.some(galleryItem => galleryItem.name == item.name)
-    //? if a match exists, you will find and update the item whose name matches the current parameter we want to remove from the cart, increasing the gallery item's `stock` property by one.
-    if(coincidence){
-        gallery.forEach(galleryItem => {
-            if(galleryItem.name == item.name){
-                galleryItem.stock += 1
-            }
-        })
-    }
-    //todo if no match is found, it means we must add the current item as if it were a new one. Since the item in the cart has its price multiplied by the number of times it was meant to be repeated, we will obtain its original price by dividing its current price by its quantity, and then reset its stock to 1.
-    else{
-        //todo current item price
-        let initPrice = item.price
-        //todo divide its price by the number of times it was repeated
-        initPrice = (initPrice/stock)
-        //todo reassign it as the main value
-        item.price = initPrice
-        //todo initialize the stock to 1
-        item.stock = 1
-        //todo add it to the gallery cart
-        gallery.push(item)
-    }
-    updateCurrentData(gallery)
-    //! we consider that if there is only one of these items left in the shopping cart and it is going to be removed, in that case we filter all the items in the cart again except for the one whose “primary key” matches that of the removed item.
-    if(stock == 1){
-        cart = cart.filter(item => item.pk !== pk)
-    }//todo but if it is not yet the only item of its type, then we readjust its current price and subtract one repetition from its stock value.
-    else{
-        cart.forEach(item => {
-            if(item.pk == pk){
-                //todo current item price
-                let initPrice = item.price
-                //todo divide its price by the number of times it was repeated
-                initPrice = (initPrice/stock)
-                //todo decrease the item's current price by the initial unit price
-                item.price -= initPrice
-                //todo reduce the item's stock by one unit
-                item.stock -= 1
-            }
-        })
-    }
-    //todo rewrite accordion items/content
-    accordionContent(cart, accordion, accordionItem)
-    //* we then reset the value of the `total` variable to 0 so we can iterate through the shopping cart once again, adding up the price of each item, since the cart has been updated.
-    //todo reset the value of the `total` variable to 0
-    total = 0
-    //todo iterate through the shopping cart once again, adding up item´s price
-    cart.forEach(item => total += parseFloat(item.price))
-    //todo update the payment cost display with the current total, formatting the number with commas for thousands (en-US style)
-    paymentCost.textContent = `Payment cost - $${total.toLocaleString('en-US')}`
-    //* we will do the same for the `totalItems` variable: reset it to 0, iterate through the cart again, and for each iteration, increase its value based on the `stock` of the current item.
-    //todo reset to 0
-    totalItems = 0
-    //todo iterate through the shopping cart once again, adding up item´s stock
-    cart.forEach(item => totalItems += item.stock)
-    selectedItems.textContent = `Total selected items - ${totalItems}`
-    //todo consider the possibility that before the current item was removed, the user's credit might not have been enough to cover all the items. Since an item was just removed, re-evaluate whether the user's credit is now greater than the total cost of all items.
-    if(user.credit > total){
-        //todo update the display to indicate that the user now has enough credit
-        enoughCredit.innerHTML = '<p class="card-text fs-5 text-success">Enough credit</p>'
-    }
-    //todo update localStorage´s user and reassign it´s shooping cart
-    user.cart = cart
-    updateUser(user)
-}
 
 //todo purchase everything in the shopping cart, provided that the user has sufficient credit.
 confirmButton.addEventListener('click', () => {
@@ -287,23 +213,18 @@ accordion.addEventListener('click', (e) => {
     user = returnUser()
     cart = [...user.cart]
     collectedItems = [...user.collectedItems]
-    const cartItem = {...user.cart.find(item => item.pk == pk)}
-    let itemPrice = {...gallery.find(galleryItem => galleryItem.name == cartItem.name)}
-    itemPrice = itemPrice.price
-    itemPrice = parseInt(itemPrice)
+    const cartItem = user.cart.find(item => item.pk == pk)
+    let itemPrice = (parseInt(cartItem.price)/parseInt(cartItem.stock))
     let stockItem = parseInt(cartItem.stock)
+    const coincidence = gallery.find(item => item.name == cartItem.name)
+    const collectionCoincidence = user.collectedItems.find(item => item.name == cartItem.name)
     //? is the user trying to buy everything?
     if(targetValue == 'Buy item(s)'){
         if(cartItem.price <= user.credit){
             user.credit -= cartItem.price
             user.cart = user.cart.filter(item => item.pk != pk)
-            const coincidence = user.collectedItems.some(item => item.name == cartItem.name)
-            if(coincidence){
-                for(let item of user.collectedItems){
-                    if(item.name == cartItem.name){
-                        item.stock += cartItem.stock
-                    }
-                }
+            if(collectionCoincidence){
+                collectionCoincidence.stock += cartItem.stock
             }else{
                 delete cartItem.price
                 user.collectedItems.push(cartItem)
@@ -337,33 +258,32 @@ accordion.addEventListener('click', (e) => {
             e.preventDefault()
             let stockValue = stockForm.stock.value
             stockValue = (stockValue) ? parseInt(stockValue) : 0
+            stockValue = (stockValue < stockItem) ? stockValue : stockItem
             let stockPrice = itemPrice*stockValue
             if(user.credit >= stockPrice){
-                let filteredItem = cart.find(item => item.pk == pk)
-                filteredItem.stock -= (stockValue < stockItem) ? stockValue : stockItem
-                if(filteredItem.stock <= 0){
-                    cart = cart.filter(item => item.pk != pk)
+                cartItem.stock -= stockValue
+                user.credit -= stockPrice
+                if(cartItem.stock <= 0){
+                    user.cart = user.cart.filter(item => item.pk != pk)
                 }else{
-                    filteredItem.price = itemPrice*filteredItem.stock
+                    cartItem.price = itemPrice*cartItem.stock
                 }
-                const coincidence = collectedItems.find(item => item.name == cartItem.name)
-                if(coincidence){
-                    coincidence.stock += (stockValue < stockItem) ? stockValue : stockItem
+                if(collectionCoincidence){
+                    collectionCoincidence.stock += stockValue
                 }else if(stockValue){
-                    cartItem.stock = (stockValue < stockItem) ? stockValue : stockItem
-                    collectedItems.push(cartItem)
+                    const newItem = {...cartItem}
+                    newItem.stock = stockValue
+                    user.collectedItems.push(newItem)
                 }
                 total = 0
-                cart.forEach(item => total += parseFloat(item.price))
+                user.cart.forEach(item => total += parseFloat(item.price))
                 paymentCost.textContent = `Payment cost - $${total}`
                 totalItems = 0
-                cart.forEach(item => totalItems += item.stock)
+                user.cart.forEach(item => totalItems += item.stock)
                 selectedItems.textContent = `Total selected items - ${totalItems}`
                 cardTextFifth.textContent = `User´s balance - $ ${(user.credit).toLocaleString('es-US')}`
-                accordionContent(collectedItems, accordionTwo, accordionSubItem)
-                accordionContent(cart, accordion, accordionItem)
-                user.cart = cart
-                user.collectedItems = collectedItems
+                accordionContent(user.collectedItems, accordionTwo, accordionSubItem)
+                accordionContent(user.cart, accordion, accordionItem)
                 updateUser(user)
                 stockForm.reset()
                 Swal.fire({
@@ -372,7 +292,7 @@ accordion.addEventListener('click', (e) => {
                     icon: 'success',
                     confirmButtonText: 'Ok',
                 })
-            }else if(user.credit <= stockPrice){
+            }else{
                 Swal.fire({
                     title: '¡Not enough credit!',
                     text: 'You don´t have enough credit to perform this action!',
@@ -424,42 +344,79 @@ accordion.addEventListener('click', (e) => {
         }
     }
     else if(targetValue == 'Remove item'){
-        const item = cart.find(item => item.pk == pk)
-        deleteItem(item)
+        //? if a match exists, you will find and update the item whose name matches the current parameter we want to remove from the cart, increasing the gallery item's `stock` property by one.
+        if(coincidence){
+            coincidence.stock += 1
+        }
+        //todo if no match is found, it means we must add the current item as if it were a new one. Since the item in the cart has its price multiplied by the number of times it was meant to be repeated, we will obtain its original price by dividing its current price by its quantity, and then reset its stock to 1.
+        else{
+            const newItem = {...cartItem}
+            //todo reassign it as the main value
+            newItem.price = itemPrice
+            //todo initialize the stock to 1
+            newItem.stock = 1
+            //todo add it to the gallery cart
+            gallery.push(newItem)
+        }
+        updateCurrentData(gallery)
+        //! we consider that if there is only one of these items left in the shopping cart and it is going to be removed, in that case we filter all the items in the cart again except for the one whose “primary key” matches that of the removed item.
+        if(stockItem == 1){
+            user.cart = user.cart.filter(item => item.pk !== pk)
+        }//todo but if it is not yet the only item of its type, then we readjust its current price and subtract one repetition from its stock value.
+        else{
+            cartItem.price -= itemPrice
+            cartItem.stock -= 1
+        }
+        //todo rewrite accordion items/content
+        accordionContent(user.cart, accordion, accordionItem)
+        //* we then reset the value of the `total` variable to 0 so we can iterate through the shopping cart once again, adding up the price of each item, since the cart has been updated.
+        //todo reset the value of the `total` variable to 0 and iterate through the shopping cart once again, adding up item´s price
+        total = 0
+        user.cart.forEach(item => total += parseFloat(item.price))
+        //todo update the payment cost display with the current total, formatting the number with commas for thousands (en-US style)
+        paymentCost.textContent = `Payment cost - $${total.toLocaleString('en-US')}`
+        //* we will do the same for the `totalItems` variable: reset it to 0, iterate through the cart again, and for each iteration, increase its value based on the `stock` of the current item.
+        //todo reset totalItems variable to 0 and iterate through the shopping cart once again, adding up item´s stock
+        totalItems = 0
+        user.cart.forEach(item => totalItems += item.stock)
+        selectedItems.textContent = `Total selected items - ${totalItems}`
+        //todo consider the possibility that before the current item was removed, the user's credit might not have been enough to cover all the items. Since an item was just removed, re-evaluate whether the user's credit is now greater than the total cost of all items.
+        if(user.credit > total){
+            //todo update the display to indicate that the user now has enough credit
+            enoughCredit.innerHTML = '<p class="card-text fs-5 text-success">Enough credit</p>'
+        }
+        //todo update localStorage´s user and reassign it´s shooping cart
+        updateUser(user)
     }else if(targetValue == 'Remove item(s)'){
         stockForm.addEventListener('submit', (e) => {
             e.preventDefault()
-            let filteredItem = cart.find(item => item.pk == pk)
             let stockValue = stockForm.stock.value
             stockValue = (stockValue) ? parseInt(stockValue) : 0
-            stockValue = (stockValue < filteredItem.stock) ? stockValue : filteredItem.stock
-            const coincidence = gallery.find(item => item.name == filteredItem.name)
+            stockValue = (stockValue < cartItem.stock) ? stockValue : cartItem.stock
             if(coincidence){
                 coincidence.stock += stockValue
             }else if(stockValue){
-                let newItem = {...filteredItem}
+                let newItem = {...cartItem}
                 newItem.price = (newItem.price/newItem.stock)
                 newItem.stock = stockValue
                 gallery.push(newItem)
             }
-            const itemGalleryPrice = (filteredItem.price/filteredItem.stock)
-            filteredItem.stock -= stockValue
-            if(filteredItem.stock <= 0){
-                cart = cart.filter(item => item.pk != pk)
+            cartItem.stock -= stockValue
+            if(cartItem.stock <= 0){
+                user.cart = user.cart.filter(item => item.pk != pk)
             }else{
-                filteredItem.price -= itemGalleryPrice*stockValue
+                cartItem.price -= itemPrice*stockValue
             }
             updateCurrentData(gallery)
-            user.cart = cart
             updateUser(user)
-            accordionContent(cart, accordion, accordionItem)
+            accordionContent(user.cart, accordion, accordionItem)
             //todo
             total = 0
-            cart.forEach(item => total += parseFloat(item.price))
+            user.cart.forEach(item => total += parseFloat(item.price))
             paymentCost.textContent = `Payment cost - $${total.toLocaleString('en-US')}`
             //todo
             totalItems = 0
-            cart.forEach(item => totalItems += item.stock)
+            user.cart.forEach(item => totalItems += item.stock)
             selectedItems.textContent = `Total selected items - ${totalItems}`
             //todo
             if(user.credit > total){
@@ -468,28 +425,23 @@ accordion.addEventListener('click', (e) => {
             stockForm.reset()
         })
     }else if(targetValue == 'Delete item(s)'){
-        const coincidence = gallery.find(item => item.name == cartItem.name)
         if(coincidence){
             coincidence.stock += cartItem.stock
         }else{
-            let initPrice = cartItem.price
-            const stock = cartItem.stock
-            initPrice = (initPrice/stock)
-            cartItem.price = initPrice
+            cartItem.price = itemPrice
             gallery.push(cartItem)
         }
-        cart = cart.filter(item => item.pk != cartItem.pk)
-        accordionContent(cart, accordion, accordionItem)
+        user.cart = user.cart.filter(item => item.pk != cartItem.pk)
+        accordionContent(user.cart, accordion, accordionItem)
         updateCurrentData(gallery)
-        user.cart = cart
         updateUser(user)
         //todo
         total = 0
-        cart.forEach(item => total += parseFloat(item.price))
+        user.cart.forEach(item => total += parseFloat(item.price))
         paymentCost.textContent = `Payment cost - $${total.toLocaleString('en-US')}`
         //todo
         totalItems = 0
-        cart.forEach(item => totalItems += item.stock)
+        user.cart.forEach(item => totalItems += item.stock)
         selectedItems.textContent = `Total selected items - ${totalItems}`
         //todo
         if(user.credit > total){
