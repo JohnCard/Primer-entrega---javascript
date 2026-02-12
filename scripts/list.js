@@ -20,10 +20,6 @@ const galleryDataButton = document.getElementById('button-gallery')
 galleryDataButton.addEventListener('click', saveGalleryData)
 //todo row div html element
 const row = document.querySelector('.row')
-//* rewrite content
-const rewriteContent = () => {
-
-}
 //todo sava items for user´s cart
 const user = returnUser()
 for(let item of gallery){
