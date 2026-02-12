@@ -33,10 +33,6 @@ const updateCurrentData = (data) => {
     saveData = JSON.stringify(saveData)
     localStorage.setItem('gallery', saveData)
 }
-//todo delete default data
-const deleteGalleryData = () => {
-    localStorage.removeItem('gallery')
-}
 //todo udd user
 const addUser = (user) => {
     let userArray = localStorage.getItem('users')
@@ -264,10 +260,10 @@ const accordionItem = (item, state='') => {
                 <p class="text-bg-light p-3 w-25">Stock - ${item.stock}</p>
                 <button class="btn btn-danger ${item.pk}">Delete item(s)</button>
                 <button class="btn btn-danger ${item.pk}">Remove item</button>
-                <button class="btn btn-warning ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Remove item(s)</button>
+                <button class="btn btn-danger ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Remove item(s)</button>
                 <button class="btn btn-success ${item.pk}">Buy item(s)</button>
                 <button class="btn btn-success ${item.pk}">Buy item</button>
-                <button class="btn btn-primary ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Choose amount</button>
+                <button class="btn btn-success ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Choose amount</button>
             </div>
         </div>
     </div>`
@@ -308,4 +304,4 @@ const accordionContent = (listItems, accordionRef, htmlItem) => {
     }
 }
 
-export {saveGalleryData, deleteGalleryData, cardItem, addItem, click, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery, stockForm}
+export {saveGalleryData, cardItem, addItem, click, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery, stockForm}

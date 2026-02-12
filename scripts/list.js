@@ -1,4 +1,4 @@
-import { saveGalleryData, deleteGalleryData, cardItem, addItem, click, gallery, returnUser } from "./helpers.js"
+import { saveGalleryData, cardItem, addItem, click, gallery, returnUser } from "./helpers.js"
 
 //todo user existence confirmation
 document.addEventListener('DOMContentLoaded', (e) => {
@@ -13,12 +13,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
         })
     }
 })
-//* Save data buttons
+//* Save data button
 const galleryDataButton = document.getElementById('button-gallery')
 galleryDataButton.addEventListener('click', saveGalleryData)
-//! Delete data buttons
-const deleteGalleryButton = document.getElementById('delete-gallery')
-deleteGalleryButton.addEventListener('click', deleteGalleryData)
 //todo row div html element
 const row = document.querySelector('.row')
 //todo sava items for user´s cart
