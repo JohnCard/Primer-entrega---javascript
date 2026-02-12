@@ -1,12 +1,8 @@
 import { Item } from "./models.js"
 
-//todo row div html element
-const row = document.querySelector('.row')
 //todo main gallery
 let gallery = localStorage.getItem('gallery')
 gallery = JSON.parse(gallery)
-//todo pull item´s stock property from alert
-const stockForm = document.getElementById('stock-form')
 //* Additional functions
 //todo random integer
 const randomInt = (min, max) => {
@@ -144,4 +140,4 @@ const accordionContent = (listItems, accordionRef, htmlItem) => {
     }
 }
 
-export {saveGalleryData, cardItem, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery, stockForm}
+export {saveGalleryData, cardItem, accordionContent, accordionItem, accordionSubItem, returnUser, updateUser, addUser, returnUserList, randomInt, updateCurrentData, gallery}
