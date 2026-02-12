@@ -218,8 +218,14 @@ emptyCartButton.addEventListener('click', () => {
     updateCurrentData(gallery)
     //* reset user´s shooping cart to empty state
     user.cart = []
+    total = 0
     //* update to new user to local storage to keep permanent it´s change
     updateUser(user)
+    //todo consider the possibility that before the current item was removed, the user's credit might not have been enough to cover all the items. Since an item was just removed, re-evaluate whether the user's credit is now greater than the total cost of all items.
+    if(user.credit > total){
+        //todo update the display to indicate that the user now has enough credit
+        enoughCredit.innerHTML = '<p class="card-text fs-5 text-success">Enough credit</p>'
+    }
     //* throw succesfully notification for current user
     Swal.fire({
         title: 'Empty cart',

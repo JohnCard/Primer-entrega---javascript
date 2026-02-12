@@ -36,8 +36,11 @@ row.addEventListener('click', (e) => {
     let user = returnUser()
     const tagContent = e.target.textContent
     const pk = e.target.classList[2]
+    const divParent = e.target.closest('div')
+    const stockContainer = divParent.children[2]
+    const stockGalleryContainer = divParent.children[3]
     const itemGallery = gallery.find(item => item.pk == pk)
-    let itemPrice = itemGallery.price
+    let itemPrice = parseInt(itemGallery.price)
     const shoopingCartCoincidence = user.cart.find(item => item.name == itemGallery.name)
     if(tagContent == 'Add to cart'){
         //todo spread new item
@@ -50,6 +53,7 @@ row.addEventListener('click', (e) => {
             if(shoopingCartCoincidence){
                 shoopingCartCoincidence.stock += stockValue
                 shoopingCartCoincidence.price += stockValue*itemPrice
+                stockContainer.textContent = `Stock cart - ${shoopingCartCoincidence.stock}`
             }
             else if(stockValue){
                 //todo Prepare user object to set local storage
@@ -58,42 +62,51 @@ row.addEventListener('click', (e) => {
                 newItem.stock = stockValue
                 newItem.price = stockValue*itemPrice
                 user.cart.push(newItem)
+                stockContainer.textContent = `Stock cart - ${stockValue}`
             }
             itemGallery.stock -= stockValue
             if(itemGallery.stock <= 0){
-                gallery = gallery.filter(item => item.pk != pk)
+                const index = gallery.indexOf(itemGallery)
+                gallery.splice(index, 1)
+                row.innerHTML = ''
+                gallery.forEach(galleryItem => {
+                    const cartItem = user.cart.find(item => item.name == galleryItem.name)
+                    row.innerHTML += (cartItem) ? cardItem(galleryItem, cartItem.stock) : cardItem(galleryItem)
+                })
+            }else{
+                stockGalleryContainer.textContent = `Stock gallery - ${itemGallery.stock}`
             }
             updateUser(user)
             updateCurrentData(gallery)
-            row.innerHTML = ''
-            gallery.forEach(galleryItem => {
-                const cartItem = user.cart.find(item => item.name == galleryItem.name)
-                row.innerHTML += (cartItem) ? cardItem(galleryItem, cartItem.stock) : cardItem(galleryItem)
-            })
             stockForm.reset()
         })
     }else{
         if(shoopingCartCoincidence){
             shoopingCartCoincidence.stock += 1
             shoopingCartCoincidence.price += itemPrice
+            stockContainer.textContent = `Stock cart - ${shoopingCartCoincidence.stock}`
         }
         else{
             const newItem = {...itemGallery}
             newItem.pk = crypto.randomUUID()
             newItem.stock = 1
-            newItem.price = parseInt(itemPrice)
+            newItem.price = itemPrice
             user.cart.push(newItem)
+            stockContainer.textContent = `Stock cart - ${1}`
         }
         itemGallery.stock -= 1
         if(itemGallery.stock == 0){
-            gallery = gallery.filter(item => item.pk != pk)
+            const index = gallery.indexOf(itemGallery)
+            gallery.splice(index, 1)
+            row.innerHTML = ''
+            gallery.forEach(galleryItem => {
+                const cartItem = user.cart.find(item => item.name == galleryItem.name)
+                row.innerHTML += (cartItem) ? cardItem(galleryItem, cartItem.stock) : cardItem(galleryItem)
+            })
+        }else{
+            stockGalleryContainer.textContent = `Stock gallery - ${itemGallery.stock}`
         }
         updateUser(user)
         updateCurrentData(gallery)
-        row.innerHTML = ''
-        gallery.forEach(galleryItem => {
-            const cartItem = user.cart.find(item => item.name == galleryItem.name)
-            row.innerHTML += (cartItem) ? cardItem(galleryItem, cartItem.stock) : cardItem(galleryItem)
-        })
     }
 })
