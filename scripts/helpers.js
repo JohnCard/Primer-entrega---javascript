@@ -84,8 +84,7 @@ const updateUser = (user) => {
 }
 // html card
 const cardItem = (item, userType='user', stockCart=0) => {
-    //! <p class="card-text min-h-50">Categories - ${item.categories.join(', ')}</p>
-    //! <p class="card-text">${item.description.slice(0, 120)}...</p>
+    // depending on userType parameter´s value, the btn/d-one class will be assigned to classButton const
     const classButton = (userType == 'manager') ? 'btn' : 'd-none'
     return `<div class="col-sm-6 col-lg-4 col-xxl-3 mb-3">
                 <div class="card">
@@ -93,10 +92,12 @@ const cardItem = (item, userType='user', stockCart=0) => {
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">Price - $${Number(item.price).toLocaleString('en-US')}</p>
-                        <p class="card-text">Stock cart - ${stockCart}</p>
+                        <p class="card-text">Stock shooping cart - ${stockCart}</p>
                         <p class="card-text">Stock gallery - ${item.stock}</p>
+                        <p class="card-text min-h-50">Categories - ${item.categories.join(', ')}</p>
+                        <h6 class="card-title">Item description</h6>
+                        <p class="card-text">${item.description.slice(0, 120)}...</p>
                         <p class="card-text min-h-50">Brand - ${item.brand}</p>
-                        <button class="btn btn-primary ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Add to cart</button>
                         <button class="btn btn-primary ${item.pk}">Add one item</button>
                         <button class="${classButton} btn-success ${item.pk}">Add item</button>
                         <button class="${classButton} btn-danger ${item.pk}">Remove item</button>
@@ -105,7 +106,6 @@ const cardItem = (item, userType='user', stockCart=0) => {
         </div>`
 }
 // accordion item html
-//! <p class="text-bg-light p-3 w-75">Categories - ${(item.categories).join(', ')}</p>
 const accordionItem = (item, state='') => {
     return `<div class="accordion-item">
         <h2 class="accordion-header">
@@ -116,15 +116,14 @@ const accordionItem = (item, state='') => {
         <div id="flush-collapse${item.pk}" class="accordion-collapse collapse ${state}" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body bg-dark-subtle">
                 <p class="text-bg-light p-3">${item.description}</p>
+                <p class="text-bg-light p-3 w-75">Categories - ${(item.categories).join(', ')}</p>
                 <p class="text-bg-light p-3 w-75">Brand - ${item.brand}</p>
                 <p class="text-bg-light p-3 w-50">Price - $${Number(item.price).toLocaleString('en-US')}</p>
                 <p class="text-bg-light p-3 w-25">Stock - ${item.stock}</p>
                 <button class="btn btn-danger ${item.pk}">Delete item(s)</button>
                 <button class="btn btn-danger ${item.pk}">Remove item</button>
-                <button class="btn btn-danger ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Remove item(s)</button>
                 <button class="btn btn-success ${item.pk}">Buy item(s)</button>
                 <button class="btn btn-success ${item.pk}">Buy item</button>
-                <button class="btn btn-success ${item.pk}" data-bs-target="#exampleModal" data-bs-toggle="modal">Choose amount</button>
             </div>
         </div>
     </div>`

@@ -10,8 +10,8 @@ class User{
         this.lastLogin = null
         this.createdAt = new Date().toISOString().slice(0,10)
         this.updatedAt = new Date().toISOString().slice(0,10)
-        this.cart = []
-        this.collectedItems = []
+        this.shoopingCart = []
+        this.collectionItems = []
         this.name = name
         this.birthday = birthday
         this.age = userAge

@@ -1,7 +1,5 @@
 import { saveGalleryData, cardItem, gallery, returnUser, updateUser, updateCurrentData } from "./helpers.js"
 
-// form html element
-const stockForm = document.getElementById('stock-form')
 // modal example element
 const modalElement = document.getElementById('exampleModal')
 // save data button and it´s event listener function
@@ -13,7 +11,6 @@ const row = document.querySelector('.row')
 const user = returnUser()
 
 
-// carousel begins
 // get the track and viewport div containers
 const track = document.querySelector(".carousel-track");
 const viewport = document.querySelector(".carousel-viewport");
@@ -98,10 +95,12 @@ document.querySelector(".left").addEventListener("click", () => {
 });
 
 
-// gallery container begins
+// iterate each item of gallery list
 for(let item of gallery){
-    const findItem = (user) ? user.cart.find(itemCart => itemCart.name == item.name) : undefined
-    row.innerHTML += (findItem) ? cardItem(item, user.role, item.stock) : cardItem(item, user.role)
+    // try to find a coinciedence in shooping cart with a item whose name matches with current gallery´s item
+    const findItem = (user) ? user.shoopingCart.find(itemCart => itemCart.name == item.name) : undefined
+    // add cart item string templateto div.row container
+    row.innerHTML += (findItem) ? cardItem(item, user.role, findItem.stock) : cardItem(item, user.role)
 }
 
 
@@ -123,48 +122,9 @@ row.addEventListener('click', (e) => {
     const itemGallery = gallery.find(item => item.pk == pk)
     // pull item´s price value
     let itemPrice = parseInt(itemGallery.price)
-    // find a cart item whose name matches the current gallery item's name
-    const shoopingCartCoincidence = user.cart.find(item => item.name == itemGallery.name)
-    if(tagContent == 'Add to cart'){
-        stockForm.addEventListener('submit', (e) => {
-            e.preventDefault()
-            let stockValue = stockForm.stock.value
-            stockValue = (stockValue) ? parseInt(stockValue) : 0
-            stockValue = (stockValue < parseInt(itemGallery.stock)) ? stockValue : parseInt(itemGallery.stock)
-            //? item exist this at user cart
-            if(shoopingCartCoincidence){
-                shoopingCartCoincidence.stock += stockValue
-                shoopingCartCoincidence.price += stockValue*itemPrice
-                stockContainer.textContent = `Stock cart - ${shoopingCartCoincidence.stock}`
-            }
-            else if(stockValue){
-                //todo prepare user object to set local storage
-                const newItem = {...itemGallery}
-                newItem.pk = crypto.randomUUID()
-                newItem.stock = stockValue
-                newItem.price = stockValue*itemPrice
-                user.cart.push(newItem)
-                stockContainer.textContent = `Stock cart - ${stockValue}`
-            }
-            itemGallery.stock -= stockValue
-            if(itemGallery.stock <= 0){
-                const index = gallery.indexOf(itemGallery)
-                gallery.splice(index, 1)
-                row.innerHTML = ''
-                gallery.forEach(galleryItem => {
-                    const cartItem = user.cart.find(item => item.name == galleryItem.name)
-                    row.innerHTML += (cartItem) ? cardItem(galleryItem, cartItem.stock) : cardItem(galleryItem)
-                })
-            }else{
-                stockGalleryContainer.textContent = `Stock gallery - ${itemGallery.stock}`
-            }
-            updateUser(user)
-            updateCurrentData(gallery)
-            const modal = bootstrap.Modal.getInstance(modalElement)
-            modal.hide()
-            stockForm.reset()
-        })
-    }else if(tagContent == 'Add one item'){
+    // find a shooing cart item whose name matches the current gallery item's name
+    const shoopingCartCoincidence = user.shoopingCart.find(item => item.name == itemGallery.name)
+    if(tagContent == 'Add one item'){
         //? any match? then we just need to modify the item in the user´s shopping cart
         if(shoopingCartCoincidence){
             // add one to the item’s stock value
@@ -172,7 +132,7 @@ row.addEventListener('click', (e) => {
             // update the unit price to indicate that we’ve added the same item again
             shoopingCartCoincidence.price += itemPrice
             // update stock html container value
-            stockContainer.textContent = `Stock cart - ${shoopingCartCoincidence.stock}`
+            stockContainer.textContent = `Stock shooping cart - ${shoopingCartCoincidence.stock}`
         }//? no match?, edit new item from scratch to add to shooping cart as new product
         else{
             // extract copy from current gallery´s item to avoid modify the itemGallery instance
@@ -184,9 +144,9 @@ row.addEventListener('click', (e) => {
             // assing its price value to unit price or original value
             newItem.price = itemPrice
             // add it to shooping cart
-            user.cart.push(newItem)
+            user.shoopingCart.push(newItem)
             // update stock container value for item´s state in shooping cart
-            stockContainer.textContent = `Stock cart - ${1}`
+            stockContainer.textContent = `Stock shooping cart - ${newItem.stock}`
         }
         // subtract one from the original item's stock value
         itemGallery.stock -= 1
@@ -201,11 +161,11 @@ row.addEventListener('click', (e) => {
             // iterate through each gallery´s item
             gallery.forEach(galleryItem => {
                 // look for a match in the shooping cart for current gallery´s item
-                const cartItem = user.cart.find(item => item.name == galleryItem.name)
+                const shoopingCartItem = user.shoopingCart.find(item => item.name == galleryItem.name)
                 // add an additional string template to the row HTML container.
                 // if a match is found in the shopping cart for the current item, we pass the item's stock value as a parameter.
                 // if no match exists, we just pass the current galleryItem as a parameter to the cardItem function to add the HTML string template.
-                row.innerHTML += (cartItem) ? cardItem(galleryItem, user.role, cartItem.stock) : cardItem(galleryItem)
+                row.innerHTML += (shoopingCartItem) ? cardItem(galleryItem, user.role, shoopingCartItem.stock) : cardItem(galleryItem)
             })
         }//? current item is still existent at gallery?
         else{
@@ -232,11 +192,11 @@ row.addEventListener('click', (e) => {
             // iterate through each gallery´s item
             gallery.forEach(galleryItem => {
                 // look for a match in the shooping cart for current gallery´s item
-                const cartItem = user.cart.find(item => item.name == galleryItem.name)
+                const shoopingCartItem = user.shoopingCart.find(item => item.name == galleryItem.name)
                 // add an additional string template to the row HTML container.
                 // if a match is found in the shopping cart for the current item, we pass the item's stock value as a parameter.
                 // if no match exists, we just pass the current galleryItem as a parameter to the cardItem function to add the HTML string template.
-                row.innerHTML += (cartItem) ? cardItem(galleryItem, user.role, cartItem.stock) : cardItem(galleryItem)
+                row.innerHTML += (shoopingCartItem) ? cardItem(galleryItem, user.role, shoopingCartItem.stock) : cardItem(galleryItem)
             })
         }//? current item is still existent at gallery?
         else{
