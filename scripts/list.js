@@ -1,5 +1,13 @@
 import { saveGalleryData, cardItem, gallery, returnUser, updateUser, updateCurrentData } from "./helpers.js"
 
+// user existence confirmation
+const userExistence = localStorage.getItem('user')
+//? some user existence confirmed?
+if(!userExistence){
+    // if not user found, redirect to login
+    window.location.href = '../pages/login.html'
+}
+
 // save data button and it´s event listener function
 const galleryDataButton = document.getElementById('button-gallery')
 galleryDataButton.addEventListener('click', saveGalleryData)
