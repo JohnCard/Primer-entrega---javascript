@@ -1,6 +1,6 @@
 # 🛍️ E-Commerce Shopping Cart Simulator
 
-A full-featured client-side e-commerce simulator built with **vanilla JavaScript**, **Bootstrap 5**, and **Sass**. Features user authentication, a dynamic product gallery with a custom carousel, a shopping cart with real-time stock management, and full session persistence using `localStorage` as the data layer.
+A full-featured client-side e-commerce simulator built with **JavaScript**, **Bootstrap**, and **Sass**. Features user authentication, a dynamic product gallery with a custom carousel, a shopping cart with real-time stock management, and full session persistence using `localStorage` as the data layer.
 
 ### 🔗 [Live Demo](https://primer-entrega-javascript.vercel.app)
 
@@ -69,7 +69,6 @@ ProyectoFinal-Sanchez-Martinez/
 
 #### Prerequisites
 - A modern web browser
-- Node.js (optional, for dependency management)
 
 #### Installation
 
@@ -85,8 +84,6 @@ npm install
 
 # Open in browser
 open index.html
-# Or use a local server:
-npx serve .
 ```
 
 #### Quick Start Guide
@@ -113,7 +110,7 @@ npx serve .
 - **OOP in JavaScript** — `User` and `Item` classes with constructors and computed properties
 - **ES6 Modules** — Import/export across multiple script files
 - **DOM Manipulation** — Dynamic element creation and event handling
-- **Client-side State Management** — Full CRUD operations via `localStorage`
+- **Client-side State Management** — Use `localStorage` as local database simulator
 - **Responsive Carousel** — Custom-built with dynamic `visibleItems` based on viewport width
 - **Form Validation** — Password confirmation, required fields
 - **UUID Generation** — Unique user IDs via `crypto.randomUUID()`
